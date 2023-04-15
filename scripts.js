@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const observer = lozad();
+    observer.observe();
+
     const header = document.querySelector("header");
 
     // Smooth scrolling for navigation links
@@ -73,4 +76,35 @@ document.addEventListener("DOMContentLoaded", function () {
         currentTestimonial = (currentTestimonial + 1) % testimonials.length;
         updateTestimonial();
     }, 5000); // Change the interval duration for faster or slower transitions
+
+    // Footer
+    const copyrightYear = document.getElementById("copyright-year");
+    copyrightYear.innerText = new Date().getFullYear();
+
+    // Scroll to top button
+    const scrollToTopButton = document.getElementById("scroll-to-top");
+
+    window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+            scrollToTopButton.style.display = "block";
+        } else {
+            scrollToTopButton.style.display = "none";
+        }
+    });
+
+    scrollToTopButton.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+});
+
+window.addEventListener("load", function () {
+    AOS.init();
+
+    const preloader = document.getElementById("preloader");
+    setTimeout(() => {
+        preloader.style.opacity = "0";
+        setTimeout(() => {
+            preloader.style.display = "none";
+        }, 1000);
+    }, 500);
 });
